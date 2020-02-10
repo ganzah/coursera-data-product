@@ -1,0 +1,31 @@
+---
+title: "Data Products - Week 2 Assignment"
+author: "Marcelo Nardelli"
+date: "10/02/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Map of Brasilia, Brazil
+
+This map shows some areas of interest in Brasilia, capital city of Brazil
+
+```{r, message=FALSE, warning=FALSE}
+library(leaflet)
+
+# Load data of points of interest
+df <- read.csv(textConnection(
+  "Name,Lat,Long
+  Praça dos Três Poderes (Sigthseeing),-15.8007,-47.8613
+  Palácio do Planalto (Executive Power),-15.7990,-47.8608
+  Congresso Nacional (Legislative Power),-15.7997,-47.8641
+  Supremo Tribunal Federal (Judicial Power),-15.8021,-47.8618
+  "
+  ))
+
+# Build and print the map
+leaflet(df) %>% addTiles() %>% addMarkers(~Long, ~Lat, label = ~Name)
+```
